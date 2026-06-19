@@ -9,23 +9,18 @@ ADMIN_PASS = "admin123"
 SUBNETS = [
     "DMZ: 10.0.13.0/24",
     "VPN Clients: 10.8.0.0/24",
-    "MISOP WS: <MISOP_WS_SUBNET>",
-    "MGMT WS: <MGMT_WS_SUBNET>",
-    "IT WS: <IT_WS_SUBNET>",
-    "BLUE WS: <BLUE_WS_SUBNET>",
-    "MISBLUE WS: <MISBLUE_WS_SUBNET>"
+    "MISOP WS: 10.2.250.0/24",
+    "MGMT WS: 10.1.21.0/24",
+    "IT WS: 10.0.14.0/24",
+    "BLUE WS: 10.0.11.0/24"
 ]
 
 HOSTS = [
     "DMZ-VPN-01",
     "DMZ-BAST-01",
-    "MISOP-MCWINWS-01",
-    "MISOP-SPECWINWS-01",
-    "MISOP-ACUWINWS-01",
     "MGMT-WINWS-01",
     "IT-WINWS-01",
-    "BLUE-WINWS-01",
-    "MISBLUE-WINWS-01"
+    "BLUE-WINWS-01"
 ]
 
 def check_auth(username, password):
@@ -89,7 +84,7 @@ def admin_ping():
         return require_auth()
 
     host = request.args.get("host", "127.0.0.1")
-    cmd = f"ping -c 4 {host}"
+    cmd = f"/bin/ping -c 4 {host}"
     result = subprocess.getoutput(cmd)
 
     return render_template_string("""
